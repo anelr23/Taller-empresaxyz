@@ -1,0 +1,141 @@
+CREATE DATABASE TALLEREMPRESSXYZ;
+CREATE TABLE Usuario(
+ID_usuario INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(50),
+apellido VARCHAR(50),
+estado VARCHAR(20),
+contraseña VARCHAR(100),
+cargo VARCHAR(50),
+salario DECIMAL(10,2),
+fecha_ingreso DATE,
+ID_perfil INT,
+FOREIGN KEY (ID_perfil) REFERENCES Perfiles(ID_perfil)
+);
+
+CREATE TABLE Perfiles(
+ID_Perfil INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(50),
+fecha_vigencia DATE,
+descripción TEXT,
+encargado VARCHAR(50)
+);
+
+CREATE TABLE Fidelización(
+ID_fidelización INT PRIMARY KEY AUTO_INCREMENT,
+ID_usuario INT,
+ID_actividad INT,
+puntos INT,
+fecha DATE,
+FOREIGN KEY (ID_usuario) REFERENCES Usuario(ID_usuario),
+FOREIGN KEY (ID_actividad) REFERENCES Actividades(ID_actividad)
+);
+
+CREATE TABLE Actividades(
+ID_actividad INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(50),
+descripción TEXT,
+fecha DATE
+);
+
+CREATE TABLE Login(
+ID_login INT PRIMARY KEY AUTO_INCREMENT,
+ID_usuario INT,
+fecha_hora_inicio DATETIME,
+dirección_IP VARCHAR(50),
+FOREIGN KEY (ID_usuario) REFERENCES Usuario(ID_usuario)
+);
+
+INSERT INTO Perfiles (nombre, fecha_vigencia, descripción, encargado) VALUES
+('Administrador', '2025-12-31', 'Controla el sistema completo.', 'Juan Pérez'),
+('Empleado', '2025-12-31', 'Usuario regular del sistema.', 'Ana Gómez'),
+('Supervisor', '2025-12-31', 'Encargado de supervisar procesos.', 'Carlos Ruiz'),
+('Gerente', '2025-12-31', 'Gestión administrativa.', 'Lucía Torres'),
+('Técnico', '2025-12-31', 'Soporte técnico a usuarios.', 'Javier Gómez'),
+('Analista', '2025-12-31', 'Realiza análisis de datos.', 'María Castro'),
+('Operador', '2025-12-31', 'Opera máquinas y procesos.', 'Pedro Ramírez'),
+('Consultor', '2025-12-31', 'Brinda asesoramiento externo.', 'Sofía Medina'),
+('Diseñador', '2025-12-31', 'Diseña proyectos y soluciones.', 'Luis Morales'),
+('Coordinador', '2025-12-31', 'Coordina actividades y tareas.', 'Elena Vargas');
+
+INSERT INTO Usuario (nombre, apellido, estado, contraseña, cargo, salario, fecha_ingreso, Id_perfil) VALUES
+('Luis', 'Martínez', 'Activo', 'password123', 'Analista', 1500.00, '2024-01-15', 6),
+('Carla', 'López', 'Activo', 'securePass', 'Recepcionista', 1200.00, '2024-05-10', 2),
+('Pedro', 'Ramírez', 'Inactivo', '123Password', 'Supervisor', 1800.00, '2023-02-05', 3),
+('Lucía', 'Torres', 'Activo', 'passwordSecure', 'Gerente', 2500.00, '2022-09-01', 4),
+('Javier', 'Gómez', 'Activo', 'pass123456', 'Técnico', 1400.00, '2023-11-25', 5),
+('Elena', 'Vargas', 'Activo', 'elena2025', 'Coordinadora', 1600.00, '2023-06-15', 10),
+('Sofía', 'Medina', 'Activo', 'consultor123', 'Consultor', 1800.00, '2024-03-21', 8),
+('Juan', 'Pérez', 'Activo', 'admin001', 'Administrador', 3000.00, '2025-01-10', 1),
+('María', 'Castro', 'Activo', 'analistaABC', 'Analista', 1700.00, '2023-04-12', 6),
+('Carlos', 'Ruiz', 'Activo', 'carlos2023', 'Supervisor', 2000.00, '2024-08-09', 3),
+('Ana', 'Gómez', 'Activo', 'empleado123', 'Empleado', 1200.00, '2024-02-05', 2),
+('Luis', 'Morales', 'Activo', 'disenador2023', 'Diseñador', 1500.00, '2023-11-15', 9),
+('Elena', 'Duarte', 'Activo', 'duarte2024', 'Recepcionista', 1300.00, '2025-03-01', 2),
+('Fernando', 'Cruz', 'Activo', 'fernando001', 'Operador', 1100.00, '2024-07-20', 7),
+('Pablo', 'Ríos', 'Inactivo', 'pablo2022', 'Operador', 1200.00, '2022-09-01', 7),
+('Marta', 'Alonso', 'Activo', 'marta_2025', 'Coordinadora', 1900.00, '2025-03-30', 10),
+('Roberto', 'Vega', 'Activo', 'vega2023', 'Gerente', 2400.00, '2023-10-20', 4),
+('Inés', 'Hernández', 'Activo', 'ines2022', 'Analista', 1600.00, '2023-01-25', 6),
+('Julia', 'Lozano', 'Activo', 'jlozano2024', 'Consultora', 1900.00, '2025-02-15', 8),
+('Alfredo', 'Santos', 'Activo', 'alfredo123', 'Operador', 1200.00, '2023-05-05', 7);
+
+INSERT INTO Login (ID_usuario, fecha_hora_inicio, dirección_IP) VALUES
+(1, '2025-01-15 08:00:00', '192.168.1.1'),
+(2, '2025-01-16 09:15:30', '192.168.1.2'),
+(3, '2025-01-17 14:45:00', '192.168.1.3'),
+(1, '2025-02-01 10:10:10', '192.168.1.1'),
+(5, '2025-02-02 11:25:45', '192.168.1.4');
+# Continuar hasta llegar a los 100 registros.
+
+INSERT INTO Actividades (nombre, descripción, fecha) VALUES
+('Convivencia Enero', 'Actividad recreativa para integrar al personal.', '2025-01-15'),
+('Capacitación Febrero', 'Curso sobre habilidades técnicas.', '2025-02-20'),
+('Torneo Deportivo Marzo', 'Competencia entre equipos internos.', '2025-03-10'),
+('Día de la Familia Abril', 'Evento familiar para colaboradores.', '2025-04-25'),
+('Jornada de Salud Mayo', 'Revisión médica y actividades saludables.', '2025-05-15'),
+('Semana de Innovación Junio', 'Promoción de ideas innovadoras.', '2025-06-05'),
+('Concurso de Habilidades Julio', 'Competencia de destrezas técnicas.', '2025-07-20'),
+('Día de la Comunidad Agosto', 'Actividades comunitarias y voluntariado.', '2025-08-18'),
+('Taller de Liderazgo Septiembre', 'Capacitación en habilidades de liderazgo.', '2025-09-12'),
+('Festival de Talento Octubre', 'Demostración de talentos personales.', '2025-10-25'),
+('Reunión Anual Noviembre', 'Cierre del año con evaluaciones y premios.', '2025-11-15'),
+('Celebración de Fin de Año Diciembre', 'Evento para celebrar los logros del año.', '2025-12-20');
+
+INSERT INTO Fidelización (ID_usuario, ID_actividad, puntos, fecha) VALUES
+(1, 1, 50, '2025-01-15'),
+(2, 1, 60, '2025-01-15'),
+(3, 1, 40, '2025-01-15'),
+(4, 1, 70, '2025-01-15'),
+(5, 2, 80, '2025-02-20'),
+(6, 2, 90, '2025-02-20'),
+(7, 2, 60, '2025-02-20'),
+(8, 3, 70, '2025-03-10'),
+(9, 3, 50, '2025-03-10'),
+(10, 3, 60, '2025-03-10'),
+(11, 4, 40, '2025-04-25'),
+(12, 4, 75, '2025-04-25'),
+(13, 4, 85, '2025-04-25'),
+(14, 5, 65, '2025-05-15'),
+(15, 5, 60, '2025-05-15'),
+(16, 5, 70, '2025-05-15'),
+(17, 6, 55, '2025-06-05'),
+(18, 6, 80, '2025-06-05'),
+(19, 6, 45, '2025-06-05'),
+(20, 7, 50, '2025-07-20'),
+(1, 7, 85, '2025-07-20'),
+(2, 7, 75, '2025-07-20'),
+(3, 8, 70, '2025-08-18'),
+(4, 8, 55, '2025-08-18'),
+(5, 8, 65, '2025-08-18'),
+(6, 9, 80, '2025-09-12'),
+(7, 9, 75, '2025-09-12'),
+(8, 9, 85, '2025-09-12'),
+(9, 10, 60, '2025-10-25'),
+(10, 10, 50, '2025-10-25'),
+(11, 10, 45, '2025-10-25'),
+(12, 11, 70, '2025-11-15'),
+(13, 11, 85, '2025-11-15'),
+(14, 11, 95, '2025-11-15'),
+(15, 12, 100, '2025-12-20'),
+(16, 12, 90, '2025-12-20'),
+(17, 12, 80, '2025-12-20');
